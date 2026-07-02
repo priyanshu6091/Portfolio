@@ -44,7 +44,7 @@ export default function Nav() {
         </ul>
 
         <a
-          href={`mailto:${profile.email}`}
+          href="#contact"
           className="hidden rounded-full border border-ink px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-paper md:inline-block"
         >
           Get in touch

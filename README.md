@@ -38,5 +38,10 @@ vercel --prod # production
 
 ## Notes
 
-- The résumé link serves `public/resume.md`. Replace it with a PDF (e.g. `public/resume.pdf`) and update `resumeHref` in `lib/data.ts` for a nicer download.
+- The résumé link serves `public/resume.pdf` (one-page, styled to match the site). To regenerate after editing `scripts/resume.html`, run:
+  ```bash
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+    --headless --disable-gpu --no-pdf-header-footer \
+    --print-to-pdf="public/resume.pdf" "file://$(pwd)/scripts/resume.html"
+  ```
 - `next` is pinned to a patched 14.2.x. Remaining `npm audit` advisories require Next 16 (a breaking upgrade) and concern server features this static site does not use (Image Optimization API, i18n middleware, RSC cache, WebSocket upgrades).

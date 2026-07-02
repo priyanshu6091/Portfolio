@@ -1,63 +1,65 @@
 import { profile } from "@/lib/data";
 import Reveal from "./Reveal";
+import CopyEmail from "./CopyEmail";
+import ContactForm from "./ContactForm";
+
+const socials = [
+  { label: "GitHub", href: profile.github, external: true },
+  { label: "LinkedIn", href: profile.linkedin, external: true },
+  { label: "Résumé", href: profile.resumeHref, external: true },
+];
 
 export default function Contact() {
   const year = 2026; // Date.* unavailable at build; graduation-year context.
 
   return (
     <footer id="contact" className="rule bg-ink text-paper">
+      {/* Call to action + form */}
       <div className="mx-auto max-w-content px-6 py-20 md:px-10 md:py-28">
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-paper/60">
-            // let&apos;s build something
-          </p>
-          <h2 className="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight tracking-tightest md:text-6xl">
-            Open to full-stack roles and interesting problems.
-          </h2>
+        <div className="grid gap-12 md:grid-cols-12 md:gap-16">
+          {/* Left: the pitch */}
+          <div className="md:col-span-6">
+            <Reveal>
+              <p className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-paper/60">
+                <span aria-hidden className="h-1.5 w-1.5 animate-pulse rounded-full bg-signal" />
+                {profile.availability}
+              </p>
+              <h2 className="mt-5 font-display text-4xl font-semibold leading-tight tracking-tightest md:text-5xl">
+                Open to full-stack roles and interesting problems.
+              </h2>
+              <CopyEmail />
+            </Reveal>
 
-          <a
-            href={`mailto:${profile.email}`}
-            className="mt-8 inline-block font-display text-2xl tracking-tight text-paper underline decoration-signal decoration-2 underline-offset-8 transition-colors hover:text-white md:text-3xl"
-          >
-            {profile.email}
-          </a>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div className="mt-14 flex flex-wrap gap-x-8 gap-y-4 font-mono text-xs uppercase tracking-widest">
-            <a
-              href={profile.github}
-              target="_blank"
-              rel="noreferrer"
-              className="text-paper/70 transition-colors hover:text-paper"
-            >
-              GitHub ↗
-            </a>
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="text-paper/70 transition-colors hover:text-paper"
-            >
-              LinkedIn ↗
-            </a>
-            <a
-              href={`tel:${profile.phone.replace(/\s/g, "")}`}
-              className="text-paper/70 transition-colors hover:text-paper"
-            >
-              {profile.phone}
-            </a>
-            <a
-              href={profile.resumeHref}
-              className="text-paper/70 transition-colors hover:text-paper"
-            >
-              Résumé ↗
-            </a>
+            <Reveal delay={0.1}>
+              <div className="mt-10 flex flex-wrap gap-3">
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target={s.external ? "_blank" : undefined}
+                    rel={s.external ? "noreferrer" : undefined}
+                    className="rounded-full border border-white/25 px-4 py-2 font-mono text-xs uppercase tracking-widest text-paper/80 transition-colors hover:border-paper hover:bg-paper hover:text-ink"
+                  >
+                    {s.label} ↗
+                  </a>
+                ))}
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
 
-        <div className="mt-16 flex flex-col justify-between gap-2 border-t border-white/15 pt-6 font-mono text-[0.7rem] text-paper/50 sm:flex-row">
-          <span>© {year} {profile.name}</span>
+          {/* Right: the form */}
+          <Reveal delay={0.15} className="md:col-span-6">
+            <ContactForm />
+          </Reveal>
+        </div>
+      </div>
+
+      {/* Thin footer strip */}
+      <div className="border-t border-white/15">
+        <div className="mx-auto flex max-w-content flex-col justify-between gap-2 px-6 py-6 font-mono text-[0.7rem] text-paper/50 md:flex-row md:px-10">
+          <span>
+            © {year} {profile.name}
+          </span>
           <span>Built with Next.js · Tailwind · deployed on Vercel</span>
         </div>
       </div>

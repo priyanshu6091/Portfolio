@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Priyanshu Galani — Résumé</title>
+<style>
+  @page { size: A4; margin: 14mm 15mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ink: #17171b; --slate: #5b5b66; --hairline: #d9d9d2;
+    --signal: #1e2aff; --paper: #ffffff;
+  }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Inter", -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink); background: var(--paper);
+    font-size: 9.4px; line-height: 1.5;
+  }
+  .mono { font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace; }
+  .display { font-family: "Space Grotesk", "Inter", sans-serif; }
+
+  /* Header */
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 4px; }
+  h1 {
+    font-family: "Space Grotesk", sans-serif; font-size: 30px; font-weight: 700;
+    letter-spacing: -0.03em; line-height: 1;
+  }
+  .role {
+    font-family: "JetBrains Mono", monospace; font-size: 8.4px;
+    text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate);
+    margin-top: 6px;
+  }
+  .contact {
+    font-family: "JetBrains Mono", monospace; font-size: 8.2px;
+    color: var(--slate); margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px 10px;
+  }
+  .contact a { color: var(--signal); text-decoration: none; }
+  .contact span.sep { color: var(--hairline); }
+
+  /* Sections */
+  section { margin-top: 13px; }
+  h2 {
+    font-family: "JetBrains Mono", monospace; font-size: 8.4px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.16em; color: var(--slate);
+    padding-bottom: 4px; border-bottom: 1px solid var(--hairline); margin-bottom: 8px;
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  h2::before { content: attr(data-n); color: var(--signal); }
+
+  p.summary { max-width: 100%; }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; }
+  .skills dt {
+    font-family: "JetBrains Mono", monospace; font-size: 8px; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--slate); white-space: nowrap; padding-top: 0.5px;
+  }
+  .skills dd { color: var(--ink); }
+
+  /* Entries */
+  .entry { margin-bottom: 10px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .entry-title { font-family: "Space Grotesk", sans-serif; font-size: 11px; font-weight: 600; }
+  .entry-meta { font-style: italic; color: var(--slate); font-size: 9px; }
+  .entry-date {
+    font-family: "JetBrains Mono", monospace; font-size: 8px; color: var(--signal);
+    white-space: nowrap;
+  }
+  ul { list-style: none; margin-top: 4px; }
+  li { position: relative; padding-left: 12px; margin-bottom: 2.5px; }
+  li::before {
+    content: ""; position: absolute; left: 0; top: 6px;
+    width: 3px; height: 3px; border-radius: 50%; background: var(--signal);
+  }
+  .stack { font-family: "JetBrains Mono", monospace; font-size: 8px; color: var(--slate); font-style: normal; }
+
+  .tight li { margin-bottom: 1.5px; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Priyanshu Galani</h1>
+    <div class="role">Full-Stack Developer · Ahmedabad, India</div>
+    <div class="contact">
+      <span>+91 8320666091</span><span class="sep">|</span>
+      <a href="mailto:galanipriyanshu@gmail.com">galanipriyanshu@gmail.com</a><span class="sep">|</span>
+      <a href="https://www.linkedin.com/in/priyanshugalani/">linkedin.com/in/priyanshugalani</a><span class="sep">|</span>
+      <a href="https://github.com/priyanshu6091">github.com/priyanshu6091</a>
+    </div>
+  </header>
+
+  <section>
+    <h2 data-n="01">Professional Summary</h2>
+    <p class="summary">Full-Stack Developer with hands-on experience building web and mobile applications using modern JavaScript frameworks and cloud tools. Skilled in developing complete solutions from start to finish, focusing on performance and user experience. Passionate about using AI tools and data-driven methods to make development faster and more effective in collaborative team environments.</p>
+  </section>
+
+  <section>
+    <h2 data-n="02">Technical Skills</h2>
+    <dl class="skills">
+      <dt>Languages</dt><dd>JavaScript, TypeScript, Java, SQL</dd>
+      <dt>Web &amp; Frameworks</dt><dd>React.js, Next.js, Node.js, Express.js, Redux, React Native, Angular, .NET</dd>
+      <dt>Cloud / DevOps</dt><dd>AWS (EC2, Lambda, S3), Docker, Git, GitHub</dd>
+      <dt>Databases</dt><dd>MongoDB, PostgreSQL, Supabase, Appwrite, Firebase</dd>
+      <dt>Tools &amp; Platforms</dt><dd>Jira, Postman, VS Code, GitHub Copilot, n8n, WebSockets, WebRTC</dd>
+      <dt>Practices</dt><dd>REST APIs, Unit Testing, Performance Optimization, Agile, Automations, OAuth 2.0</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2 data-n="03">Work Experience</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Software Developer Intern <span class="entry-meta">— Azilen Technologies, Ahmedabad</span></span>
+        <span class="entry-date">Jan 2026 – Jun 2026</span>
+      </div>
+      <ul>
+        <li>Applied clean-code principles and AI-assisted workflows (GitHub Copilot, structured prompt engineering) to accelerate delivery across multiple concurrent projects.</li>
+        <li>Authored end-to-end technical documentation for a multi-module legacy background-check platform inactive for years, reviving the project and enabling seamless onboarding.</li>
+        <li>Migrated the candidate module from .NET Framework 4.6 to a modern .NET backend with Angular frontend and PostgreSQL — full parity with all legacy modules in 1 month, the fastest turnaround in the revival timeline.</li>
+        <li>Delivered iterative, responsive Angular UI enhancements aligned with evolving design and product requirements.</li>
+        <li>Drove OAuth 2.0 integrations — analysed third-party docs, set up developer portals, built and submitted OAuth apps, authored guides, and produced demo videos for external app submissions.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">Software Developer Intern <span class="entry-meta">— Skill Software INC.</span></span>
+        <span class="entry-date">Mar 2025 – Aug 2025</span>
+      </div>
+      <ul>
+        <li>Built and deployed React Native apps with AWS (Lambda, EC2, S3), delivering smooth, responsive interfaces for iOS and Android.</li>
+        <li>Contributed to 2 client projects under Agile workflows — sprint planning, daily standups, and code reviews.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">MERN Developer <span class="entry-meta">— Citadel Infotech Pvt. Ltd., Rajkot</span></span>
+        <span class="entry-date">May 2024 – Jul 2024</span>
+      </div>
+      <ul>
+        <li>Built a Library Management System with the MERN stack — book, user, and transaction management.</li>
+        <li>Designed the UI, developed backend APIs, and deployed to Vercel and Render.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-n="04">Projects</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">AIDynamoLearn</span>
+        <span class="stack">React · Node.js · MongoDB · Express · NLP</span>
+      </div>
+      <ul class="tight">
+        <li>AI-powered platform with a chatbot and PDF reader using vector embeddings and OpenAI APIs to query and read book content faster — cut search time by 60%.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">CodeColab</span>
+        <span class="stack">React · Node.js · MongoDB · WebSockets · WebRTC</span>
+      </div>
+      <ul class="tight">
+        <li>Real-time collaborative code editor with syntax highlighting for 15+ languages, intelligent auto-suggestions, secure rooms, and WebRTC group chat for remote pair programming.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">TaxSavvy</span>
+        <span class="stack">React · Node.js · MongoDB · Express · Chart.js</span>
+      </div>
+      <ul class="tight">
+        <li>Full-stack tax-planning platform with personalized recommendations and real-time insights, automating calculations across 20+ deduction categories.</li>
+        <li>Interactive Chart.js dashboards improved user decision-making speed by 40%.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-n="05">Education</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <span class="entry-title">B.Tech, Information Technology <span class="entry-meta">— Charusat University · CGPA 8.81/10.0</span></span>
+        <span class="entry-date">Graduation May 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-n="06">Certifications &amp; Achievements</h2>
+    <ul class="tight">
+      <li><strong>DoseHACK-24 Hackathon</strong> — 2nd Runner-Up (Top 3 among 50+ teams)</li>
+      <li><strong>Google Cloud Certified Professional (GCCP)</strong> — Cloud Architecture &amp; Services</li>
+      <li><strong>Google Foundations of Project Management</strong> — Professional Certificate</li>
+      <li><strong>NPTEL Certifications</strong> — Data Structures (Java), DBMS, Operating Systems Fundamentals</li>
+    </ul>
+  </section>
+</body>
+</html>

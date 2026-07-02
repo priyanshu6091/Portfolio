@@ -68,33 +68,39 @@ export default function Hero() {
             variants={item}
             className="mt-9 flex flex-wrap items-center gap-3"
           >
+            {/* Primary action */}
             <a
               href="#work"
               className="rounded-full bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-paper transition-transform hover:-translate-y-0.5"
             >
               View work
             </a>
+            {/* Secondary action — what recruiters reach for; the header owns "get in touch" */}
             <a
-              href={`mailto:${profile.email}`}
+              href={profile.resumeHref}
+              target="_blank"
+              rel="noreferrer"
               className="rounded-full border border-ink px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-paper"
             >
-              Email me
+              Résumé
             </a>
+            {/* Tertiary — quiet text links, not competing pills */}
+            <span className="mx-1 hidden h-4 w-px bg-hairline sm:inline-block" aria-hidden />
             <a
               href={profile.github}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-hairline px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-slate transition-colors hover:border-ink hover:text-ink"
+              className="font-mono text-xs uppercase tracking-widest text-slate underline-offset-4 transition-colors hover:text-ink hover:underline"
             >
-              GitHub
+              GitHub ↗
             </a>
             <a
               href={profile.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-hairline px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-slate transition-colors hover:border-ink hover:text-ink"
+              className="font-mono text-xs uppercase tracking-widest text-slate underline-offset-4 transition-colors hover:text-ink hover:underline"
             >
-              LinkedIn
+              LinkedIn ↗
             </a>
           </motion.div>
 

@@ -8,7 +8,9 @@ export const profile = {
   email: "galanipriyanshu@gmail.com",
   linkedin: "https://www.linkedin.com/in/priyanshugalani/",
   github: "https://github.com/priyanshu6091",
-  resumeHref: "/resume.md",
+  resumeHref: "/resume.pdf",
+  // Short availability line for the contact section (mono spec-sheet style).
+  availability: "Available from June 2026 · Ahmedabad / Remote",
   // Hero thesis — the most characteristic thing about the work.
   thesis:
     "I build web and mobile products end-to-end — from data model to interface — and ship them fast.",
@@ -164,3 +166,13 @@ export const nav = [
   { label: "Work", href: "#work" },
   { label: "Contact", href: "#contact" },
 ];
+
+// Contact form config.
+// Web3Forms is free, needs no backend and no account dashboard — get an
+// access key at https://web3forms.com (enter your email, they mail you a key),
+// then paste it below. Until a real key is set, the form runs in a safe
+// "demo" mode that validates + shows the success state without sending.
+export const contactConfig = {
+  web3formsKey: "0faa2350-2a5d-40d4-965b-81c807b87f26",
+};
+
