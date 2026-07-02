@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:skillsmp.com)",
+      "Bash(npm install *)",
+      "Bash(npm audit *)",
+      "Bash(node -p \"require\\('next/package.json'\\).version\")",
+      "Bash(npm run *)"
+    ]
+  }
+}
