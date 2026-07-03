@@ -15,7 +15,7 @@ export const profile = {
   thesis:
     "I build web and mobile products end-to-end — from data model to interface — and ship them fast.",
   summary:
-    "Full-Stack Developer with hands-on experience building web and mobile applications using modern JavaScript frameworks and cloud tools. I focus on performance and user experience, and I lean on AI-assisted, data-driven workflows to make development faster and more effective in collaborative teams.",
+    "Full-Stack Developer with hands-on experience building web and mobile applications using modern JavaScript frameworks, cloud infrastructure, and AI/agentic tools. Experienced in LLM-powered application development, multi-agent orchestration, and workflow automation, with a focus on performance and user experience.",
 };
 
 // Build manifest — the spec-sheet signature. Real numbers from the work.
@@ -31,7 +31,20 @@ export const manifest: { value: string; label: string }[] = [
 export const skills: { group: string; items: string[] }[] = [
   {
     group: "Languages",
-    items: ["JavaScript", "TypeScript", "Java", "SQL"],
+    items: ["Python", "JavaScript", "TypeScript", "Java", "SQL"],
+  },
+  {
+    group: "AI & Agentic Tools",
+    items: [
+      "LangChain",
+      "LangGraph",
+      "NousResearch Hermes",
+      "OpenAI API (GPT)",
+      "RAG Architecture",
+      "Vector Embeddings",
+      "Prompt Engineering",
+      "GitHub Copilot",
+    ],
   },
   {
     group: "Web & Frameworks",
@@ -48,15 +61,15 @@ export const skills: { group: string; items: string[] }[] = [
   },
   {
     group: "Cloud & DevOps",
-    items: ["AWS (EC2, Lambda, S3)", "Docker", "Git", "GitHub"],
+    items: ["AWS (EC2, Lambda, S3)", "Docker", "Git", "GitHub", "GitHub Actions"],
   },
   {
     group: "Databases",
-    items: ["MongoDB", "PostgreSQL", "Supabase", "Appwrite", "Firebase"],
+    items: ["MongoDB", "PostgreSQL", "MySQL", "Supabase", "Appwrite", "Firebase"],
   },
   {
     group: "Tools & Platforms",
-    items: ["Jira", "Postman", "GitHub Copilot", "n8n", "WebSockets", "WebRTC"],
+    items: ["Apache Superset", "Jira", "Postman", "n8n", "VS Code", "WebSockets", "WebRTC"],
   },
   {
     group: "Practices",
@@ -86,6 +99,7 @@ export const experience: Experience[] = [
     location: "Ahmedabad",
     period: "Jan 2026 — Jun 2026",
     bullets: [
+      "Built an LLM analytics chatbot using LangGraph and Apache Superset to convert natural language into SQL and generate interactive charts.",
       "Applied clean-code principles and AI-assisted workflows (GitHub Copilot, structured prompt engineering) to accelerate delivery across multiple concurrent projects.",
       "Authored end-to-end technical documentation for a multi-module legacy background-check platform inactive for years — module-level and system-wide docs that revived the project and enabled seamless onboarding.",
       "Migrated the candidate module from .NET Framework 4.6 to a modern .NET backend with Angular frontend and PostgreSQL, delivering full parity with all legacy modules in one month — the fastest turnaround in the revival timeline.",
@@ -103,7 +117,7 @@ export const experience: Experience[] = [
     ],
   },
   {
-    role: "MERN Developer",
+    role: "MERN Developer Intern",
     company: "Citadel Infotech Pvt. Ltd.",
     location: "Rajkot",
     period: "May 2024 — Jul 2024",
@@ -126,8 +140,8 @@ export const projects: Project[] = [
     name: "AIDynamoLearn",
     tagline: "AI reading + query engine for books",
     description:
-      "AI-powered platform with a chatbot and PDF reader that uses vector embeddings and OpenAI APIs to let users query and read book content faster — cutting search time by 60%.",
-    stack: ["React", "Node.js", "MongoDB", "Express.js", "NLP"],
+      "AI-powered learning platform built on a RAG architecture — integrates OpenAI GPT API with vector embeddings for semantic document indexing, enabling natural-language queries across PDF book content and cutting search time by 60%.",
+    stack: ["React", "Node.js", "MongoDB", "OpenAI API", "Vector Embeddings", "NLP"],
   },
   {
     name: "CodeColab",
@@ -146,7 +160,7 @@ export const projects: Project[] = [
 ];
 
 export const education = {
-  degree: "B.Tech, Information Technology",
+  degree: "Bachelor of Technology, Information Technology",
   school: "Charusat University",
   detail: "CGPA 8.81 / 10.0",
   period: "Graduation May 2026",
@@ -156,7 +170,7 @@ export const certifications: string[] = [
   "DoseHACK-24 Hackathon — 2nd Runner-Up (Top 3 of 50+ teams)",
   "Google Cloud Certified Professional (GCCP) — Cloud Architecture & Services",
   "Google — Foundations of Project Management (Professional Certificate)",
-  "NPTEL — Data Structures (Java), DBMS, Operating Systems Fundamentals",
+  "NPTEL — Data Structures using Java (IIT-verified), Database Management Systems, Operating Systems Fundamentals",
 ];
 
 export const nav = [
