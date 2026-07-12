@@ -1,17 +1,75 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Script from "next/script";
 import { contactConfig, profile } from "@/lib/data";
 
 type Status = "idle" | "sending" | "success" | "error";
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+      reset: (id?: string) => void;
+      remove: (id: string) => void;
+    };
+  }
+}
 
 const isConfigured =
   contactConfig.web3formsKey &&
   contactConfig.web3formsKey !== "YOUR_WEB3FORMS_ACCESS_KEY";
 
+const TURNSTILE_SITE_KEY = contactConfig.turnstileSiteKey;
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const [token, setToken] = useState("");
+
+  const turnstileRef = useRef<HTMLDivElement | null>(null);
+  const widgetIdRef = useRef<string | null>(null);
+
+  // Render the Turnstile widget once the script is available. Re-runs when
+  // `status` changes (e.g. returning from the success panel) so the widget
+  // is freshly mounted with the form.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    let tries = 0;
+    const renderWidget = () => {
+      const el = turnstileRef.current;
+      if (!el || !window.turnstile || widgetIdRef.current) return;
+      widgetIdRef.current = window.turnstile.render(el, {
+        sitekey: TURNSTILE_SITE_KEY,
+        callback: (t: string) => setToken(t),
+        "expired-callback": () => setToken(""),
+        "error-callback": () => setToken(""),
+      });
+    };
+    renderWidget();
+    const interval = setInterval(() => {
+      if (window.turnstile) {
+        renderWidget();
+        if (widgetIdRef.current) clearInterval(interval);
+      } else if (++tries > 50) {
+        clearInterval(interval);
+      }
+    }, 100);
+    return () => {
+      clearInterval(interval);
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current);
+      }
+      widgetIdRef.current = null;
+    };
+  }, [status]);
+
+  const resetCaptcha = () => {
+    if (widgetIdRef.current && window.turnstile) {
+      window.turnstile.reset(widgetIdRef.current);
+    }
+    setToken("");
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,35 +92,56 @@ export default function ContactForm() {
       setError("That email address doesn't look right.");
       return;
     }
-
-    setStatus("sending");
-
-    // Demo mode: no key yet — validate and show success without sending.
-    if (!isConfigured) {
-      window.setTimeout(() => setStatus("success"), 600);
+    if (!token) {
+      setError("Please complete the captcha.");
       return;
     }
 
+    setStatus("sending");
+
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      // 1) Prove the captcha server-side.
+      const verifyRes = await fetch("/api/contact", {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: (() => {
-          data.set("access_key", contactConfig.web3formsKey);
-          data.set("subject", `Portfolio message from ${name}`);
-          data.set("from_name", "Portfolio Contact Form");
-          return data;
-        })(),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ name, email, message, token }),
       });
-      const json = await res.json();
-      if (json.success) {
-        setStatus("success");
-        form.reset();
-      } else {
+      const verifyJson = await verifyRes.json();
+      if (!verifyJson.success) {
+        resetCaptcha();
         setStatus("error");
-        setError(json.message || "Something went wrong. Please email me directly.");
+        setError(verifyJson.message || "Captcha verification failed. Please try again.");
+        return;
       }
+
+      // 2) Send the email from the browser (Web3Forms blocks server-side calls).
+      if (isConfigured) {
+        const fd = new FormData();
+        fd.set("access_key", contactConfig.web3formsKey);
+        fd.set("subject", `Portfolio message from ${name}`);
+        fd.set("from_name", "Portfolio Contact Form");
+        fd.set("name", name);
+        fd.set("email", email);
+        fd.set("message", message);
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: fd,
+        });
+        const json = await res.json();
+        if (!json.success) {
+          resetCaptcha();
+          setStatus("error");
+          setError(json.message || "Something went wrong. Please email me directly.");
+          return;
+        }
+      }
+
+      resetCaptcha();
+      setStatus("success");
+      form.reset();
     } catch {
+      resetCaptcha();
       setStatus("error");
       setError("Network error. Please email me directly.");
     }
@@ -94,7 +173,7 @@ export default function ContactForm() {
   }
 
   const fieldClass =
-    "w-full rounded-lg border border-white/15 bg-white/[0.03] px-4 py-3 text-paper placeholder:text-paper/35 transition-colors focus:border-signal focus:bg-white/[0.06] focus:outline-none";
+    "w-full rounded-lg border border-white/15 bg-white/[0.03] px-4 py-3 text-paper placeholder:text-paper/35 transition-colors focus:border-signal focus:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-signal/50 focus-visible:ring-offset-2 focus-visible:ring-offset-ink";
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-4">
@@ -128,6 +207,17 @@ export default function ContactForm() {
           Message
         </label>
         <textarea id="message" name="message" required rows={4} placeholder="What are you working on?" className={`${fieldClass} resize-none`} />
+      </div>
+
+      <div>
+        <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-widest text-paper/60">
+          Captcha
+        </span>
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          strategy="afterInteractive"
+        />
+        <div ref={turnstileRef} className="cf-turnstile" />
       </div>
 
       {error && (

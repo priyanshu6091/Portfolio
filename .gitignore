@@ -6,3 +6,8 @@ next-env.d.ts
 .DS_Store
 .vercel
 npm-debug.log*
+
+# env files (may contain secrets — never commit)
+.env
+.env.local
+.env*.local

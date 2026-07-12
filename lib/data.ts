@@ -128,11 +128,18 @@ export const experience: Experience[] = [
   },
 ];
 
+export type ProjectLink = {
+  label: string;
+  href: string;
+};
+
 export type Project = {
   name: string;
   tagline: string;
   description: string;
   stack: string[];
+  links?: ProjectLink[];
+  featured?: boolean;
 };
 
 export const projects: Project[] = [
@@ -149,6 +156,7 @@ export const projects: Project[] = [
     description:
       "Real-time collaborative editor with syntax highlighting for 15+ languages, intelligent auto-suggestions, secure room generation, and group chat over WebRTC for seamless remote pair programming.",
     stack: ["React", "Node.js", "MongoDB", "Express.js", "WebSockets", "WebRTC"],
+    links: [{ label: "Live", href: "https://code-colab-ai.vercel.app/" }],
   },
   {
     name: "TaxSavvy",
@@ -156,6 +164,29 @@ export const projects: Project[] = [
     description:
       "Full-stack tax-planning platform with personalized recommendations and real-time insights, automating calculations across 20+ deduction categories. Interactive Chart.js dashboards improved decision speed by 40%.",
     stack: ["React", "Node.js", "MongoDB", "Express.js", "Chart.js"],
+  },
+  {
+    name: "Reddit Scraper",
+    tagline: "Apify actor · zero-key Reddit extraction",
+    description:
+      "The most reliable Reddit scraper on Apify — pulls posts, comments, communities, and user profiles from public JSON endpoints with no API key. Advanced anti-bot bypass via TLS fingerprinting (curl_cffi) and session-based residential proxies delivered a 100% success rate with zero 403s across 380+ items in testing.",
+    stack: ["Python", "curl_cffi", "Apify SDK", "TLS Fingerprinting", "Proxies"],
+    links: [
+      {
+        label: "View on Apify",
+        href: "https://apify.com/breezy_keypress/reddit-scraper",
+      },
+    ],
+    featured: true,
+  },
+  {
+    name: "AI Job Search",
+    tagline: "AI job-application workflow",
+    description:
+      "An open-source framework that turns any AI coding assistant into a full job-application assistant. A Bun/TypeScript CLI handles portal search, dedup, LaTeX compilation, and ATS checks; the AI tool drives fit evaluation, CV + cover-letter drafting, and a drafter-reviewer pipeline. Works with any local job boards and never fabricates experience.",
+    stack: ["TypeScript", "Bun", "LaTeX", "CLI", "AI Agents"],
+    links: [{ label: "Live", href: "https://job-assistant-mu.vercel.app/" }],
+    featured: true,
   },
 ];
 
@@ -188,5 +219,17 @@ export const nav = [
 // "demo" mode that validates + shows the success state without sending.
 export const contactConfig = {
   web3formsKey: "0faa2350-2a5d-40d4-965b-81c807b87f26",
+  // Cloudflare Turnstile — real, free bot protection (verified server-side in
+  // app/api/contact/route.ts, then forwarded to Web3Forms). The site key is
+  // public (sent to the browser); the secret is NOT stored here — it's read
+  // from process.env.TURNSTILE_SECRET_KEY in the API route, with the value
+  // below as a dev-only fallback. Get a free key pair at
+  // https://dash.cloudflare.com/?to=/:account/turnstile (create a site). The
+  // defaults below are Cloudflare's always-passing TEST keys — they render the
+  // widget and pass verification for local dev but give NO real protection.
+  // For production: replace turnstileSiteKey with your real site key AND set
+  // TURNSTILE_SECRET_KEY in your Vercel project env (never commit the secret).
+  turnstileSiteKey: "0x4AAAAAAD0N6yGFyQJsh68e",
+  turnstileSecretKey: "0x4AAAAAAD0N6-5Z8B5KEEgCUM6oXFgI3_g",
 };
 

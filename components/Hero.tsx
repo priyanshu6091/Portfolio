@@ -11,7 +11,7 @@ export default function Hero() {
   const container = {
     hidden: {},
     show: {
-      transition: { staggerChildren: reduce ? 0 : 0.08, delayChildren: 0.05 },
+      transition: { staggerChildren: reduce ? 0 : 0.06, delayChildren: 0.05 },
     },
   };
   const item = {
@@ -25,12 +25,11 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden">
-      <div className="mx-auto max-w-content px-6 pb-16 pt-32 md:px-10 md:pb-24 md:pt-40">
+      <div className="mx-auto max-w-content px-6 pb-20 pt-32 md:px-10 md:pb-28 md:pt-48">
         <motion.div variants={container} initial="hidden" animate="show">
-          {/* Connective line motif: frontend -> backend -> cloud */}
           <motion.div
             variants={item}
-            className="mb-8 flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-slate"
+            className="mb-10 flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-slate"
           >
             {layers.map((layer, i) => (
               <span key={layer} className="flex items-center gap-2">
@@ -43,10 +42,7 @@ export default function Hero() {
             ))}
           </motion.div>
 
-          <motion.p
-            variants={item}
-            className="eyebrow"
-          >
+          <motion.p variants={item} className="eyebrow">
             {profile.role} · {profile.location}
           </motion.p>
 
@@ -66,25 +62,26 @@ export default function Hero() {
 
           <motion.div
             variants={item}
-            className="mt-9 flex flex-wrap items-center gap-3"
+            className="mt-10 flex flex-wrap items-center gap-3"
           >
-            {/* Primary action */}
-            <a
+            <motion.a
               href="#work"
-              className="rounded-full bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-paper transition-transform hover:-translate-y-0.5"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="rounded-full bg-ink px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-paper"
             >
               View work
-            </a>
-            {/* Secondary action — what recruiters reach for; the header owns "get in touch" */}
-            <a
+            </motion.a>
+            <motion.a
               href={profile.resumeHref}
               target="_blank"
               rel="noreferrer"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
               className="rounded-full border border-ink px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-paper"
             >
               Résumé
-            </a>
-            {/* Tertiary — quiet text links, not competing pills */}
+            </motion.a>
             <span className="mx-1 hidden h-4 w-px bg-hairline sm:inline-block" aria-hidden />
             <a
               href={profile.github}
@@ -104,19 +101,18 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          {/* Build manifest — spec-sheet signature */}
           <motion.div
             variants={item}
-            className="mt-16 border-t border-hairline pt-8"
+            className="mt-20 border-t border-hairline pt-10"
           >
-            <p className="eyebrow mb-6">// build manifest</p>
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
+            <p className="eyebrow mb-8">// build manifest</p>
+            <dl className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3">
               {manifest.map((m) => (
-                <div key={m.label} className="border-l border-hairline pl-4">
-                  <dt className="font-display text-3xl font-semibold tracking-tightest text-ink md:text-4xl">
+                <div key={m.label} className="border-l border-hairline pl-5">
+                  <dt className="font-display text-4xl font-semibold tracking-tightest text-ink md:text-5xl">
                     {m.value}
                   </dt>
-                  <dd className="mt-1 font-mono text-[0.7rem] leading-relaxed text-slate">
+                  <dd className="mt-1.5 font-mono text-[0.7rem] leading-relaxed text-slate">
                     {m.label}
                   </dd>
                 </div>
